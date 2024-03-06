@@ -1,0 +1,47 @@
+class Solution
+{
+    private:
+        
+        int prime=101;
+        
+        long calcHash(string str)
+        {
+            long hash=0;
+            for(int i=0;i<str.length();i++)
+            {
+                hash+=str[i]*pow(prime,i);
+            }
+            return hash;
+        }
+        
+        long updateHash(long prevHash, char oldChar, char newChar, int patLen)
+        {
+            long newHash=(prevHash-oldChar)/prime;
+            newHash+=newChar*pow(prime,patLen-1);
+            
+            return newHash;
+        }
+        
+    public:
+        vector <int> search(string pattern, string text)
+        {
+            int patLen=pattern.length();
+            long patHash=calcHash(pattern);
+            long txtHash=calcHash(text.substr(0,patLen));
+            vector<int> ans;
+            
+            for(int i=0;i<=text.length()-patLen;i++)
+            {
+                if(txtHash==patHash)
+                {
+                    if(text.substr(i,patLen)==pattern)
+                        ans.push_back(i+1);
+                }
+                if(i<text.length()-patLen)
+                    txtHash=updateHash(txtHash, text[i], text[i+patLen], patLen);
+            }
+            
+            return ans;
+        }
+     
+};
