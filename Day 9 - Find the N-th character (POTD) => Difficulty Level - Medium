@@ -1,0 +1,28 @@
+
+class Solution{
+  public:
+    char nthCharacter(string s, int r, int n) 
+    {
+        string s1="";
+        
+        for(int i=0;i<r;i++)
+        {
+            
+            for(int j=0;j<=n;j++)
+            {
+                
+                if(s[j]=='0')
+                    s1+="01";
+                else
+                    s1+="10";
+                    
+            }
+            
+            s=s1;
+            s1="";
+            
+        }
+        
+        return s[n];
+    }
+};
