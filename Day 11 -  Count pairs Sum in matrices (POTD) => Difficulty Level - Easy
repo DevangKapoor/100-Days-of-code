@@ -1,0 +1,32 @@
+class Solution
+{
+    public:	
+	
+	    int countPairs(vector<vector<int>> &mat1, vector<vector<int>> &mat2, int n, int x)
+	    {
+	        int noOfPairs = 0;
+            int left = 0, right = n * n - 1;
+
+            while (left < n * n && right >= 0)
+            {
+                int sum = mat1[left / n][left % n] + mat2[right / n][right % n];
+
+                if (sum == x)
+                {
+                    noOfPairs++;
+                    left++;
+                    right--;
+                }
+                else if (sum < x)
+                {
+                    left++;
+                }
+                else
+                {
+                    right--;
+                }
+            }
+            
+            return noOfPairs;
+	    }
+};
