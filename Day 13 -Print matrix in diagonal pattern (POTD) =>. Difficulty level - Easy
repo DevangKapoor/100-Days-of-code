@@ -1,33 +1,46 @@
-class Solution{
+class Solution
+{
   public:
     vector<int> matrixDiagonally(vector<vector<int>>&mat)
     {
-         int n=mat.size(),row=0,col=0;
-         vector<int >ans;
-         bool isReverse=false;
-         while(col<n){
-             int i=row,j=col;
-             vector<int>temp;
-             while(i<n and j<n and i>=0 and j>=0){
-                 temp.push_back(mat[i][j]);
-                 i--;
-                 j++;
-                 
-             }
-             if(isReverse) reverse(temp.begin(),temp.end());
-             ans.insert(ans.end(),temp.begin(),temp.end());
-             if(row!=n-1){
-                 row++;
-                 col=0;
-             }
-             else{
-                 col++;
-                 
-             }
-             isReverse=!isReverse;
-             
-         }
-         return ans;
+        int i=0,j=0,a=0;
+        vector<int> ans;
+        
+        for(a=0;a<((2*mat.size())-1);a++)
+        {
+            
+            if(a%2==0 || a==0)
+            {
+                while(i>0 && j<(mat.size()-1))
+                {
+                    ans.push_back(mat[i][j]);
+                    i--;
+                    j++;
+                }
+                ans.push_back(mat[i][j]);
+                
+                if(j==(mat[0].size()-1))
+                    i++;
+                else
+                    j++;
+            }
+            else
+            {
+                while(i<(mat.size()-1) && j>0)
+                {
+                    ans.push_back(mat[i][j]);
+                    i++;
+                    j--;
+                }
+                ans.push_back(mat[i][j]);
+                
+                if(i==(mat.size()-1))
+                    j++;
+                else
+                    i++;
+            }
+        }
+        
+        return ans;
     }
-
 };
